@@ -2,6 +2,385 @@
   "list": {
     "service": "iptv",
     "title": "bosssports",
-    "item": []
+    "item": [
+      {
+        "service": "iptv",
+        "title": "Erzurumspor - Bodrumspor",
+        "group": "13:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=77",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=77"
+      },
+      {
+        "service": "iptv",
+        "title": "Erzurumspor - Bodrumspor",
+        "group": "13:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=781",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=781"
+      },
+      {
+        "service": "iptv",
+        "title": "Keçiörengücü - Esenler Erokspor",
+        "group": "13:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=782",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=782"
+      },
+      {
+        "service": "iptv",
+        "title": "Gaziantep FK - Göztepe",
+        "group": "14:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=778",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=778"
+      },
+      {
+        "service": "iptv",
+        "title": "Milan - Sassuolo",
+        "group": "14:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=744",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=744"
+      },
+      {
+        "service": "iptv",
+        "title": "Milan - Sassuolo",
+        "group": "14:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=765",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=765"
+      },
+      {
+        "service": "iptv",
+        "title": "Sevilla - Real Oviedo",
+        "group": "16:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=763",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=763"
+      },
+      {
+        "service": "iptv",
+        "title": "Vanspor - Ümraniyespor",
+        "group": "16:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=77",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=77"
+      },
+      {
+        "service": "iptv",
+        "title": "Vanspor - Ümraniyespor",
+        "group": "16:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=781",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=781"
+      },
+      {
+        "service": "iptv",
+        "title": "West Ham - Aston Villa",
+        "group": "17:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=1020",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=1020"
+      },
+      {
+        "service": "iptv",
+        "title": "Fatih Karagümrük - Kocaelispor",
+        "group": "17:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=778",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=778"
+      },
+      {
+        "service": "iptv",
+        "title": "Crystal Palace - Manchester City",
+        "group": "17:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=779",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=779"
+      },
+      {
+        "service": "iptv",
+        "title": "Udinese - Napoli",
+        "group": "17:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=744",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=744"
+      },
+      {
+        "service": "iptv",
+        "title": "Udinese - Napoli",
+        "group": "17:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=765",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=765"
+      },
+      {
+        "service": "iptv",
+        "title": "Sunderland - Newcastle",
+        "group": "17:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=782",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=782"
+      },
+      {
+        "service": "iptv",
+        "title": "Nottingham Forest - Tottenham",
+        "group": "17:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=780",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=780"
+      },
+      {
+        "service": "iptv",
+        "title": "Fiorentina - Verona",
+        "group": "17:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=754",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=754"
+      },
+      {
+        "service": "iptv",
+        "title": "Freiburg - B.Dortmund",
+        "group": "17:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=762",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=762"
+      },
+      {
+        "service": "iptv",
+        "title": "Celta Vigo - Athletic Bilbao",
+        "group": "18:15",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=763",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=763"
+      },
+      {
+        "service": "iptv",
+        "title": "Pendikspor - Iğdırspor",
+        "group": "19:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=77",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=77"
+      },
+      {
+        "service": "iptv",
+        "title": "Pendikspor - Iğdırspor",
+        "group": "19:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=781",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=781"
+      },
+      {
+        "service": "iptv",
+        "title": "Auxerre - Lille",
+        "group": "19:15",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=780",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=780"
+      },
+      {
+        "service": "iptv",
+        "title": "Lens - Nice",
+        "group": "19:15",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=782",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=782"
+      },
+      {
+        "service": "iptv",
+        "title": "Brentford - Leeds United",
+        "group": "19:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=779",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=779"
+      },
+      {
+        "service": "iptv",
+        "title": "Bayern Münih - Mainz",
+        "group": "19:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=754",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=754"
+      },
+      {
+        "service": "iptv",
+        "title": "Trabzonspor - Beşiktaş",
+        "group": "20:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=777",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=777"
+      },
+      {
+        "service": "iptv",
+        "title": "Genoa - Inter",
+        "group": "20:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=744",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=744"
+      },
+      {
+        "service": "iptv",
+        "title": "Genoa - Inter",
+        "group": "20:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=765",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=765"
+      },
+      {
+        "service": "iptv",
+        "title": "Samsunspor - Rams Başakşehir",
+        "group": "20:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=778",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=778"
+      },
+      {
+        "service": "iptv",
+        "title": "Levante - Villarreal",
+        "group": "20:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=763",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=763"
+      },
+      {
+        "service": "iptv",
+        "title": "Levante - Villarreal",
+        "group": "20:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=1020",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=1020"
+      },
+      {
+        "service": "iptv",
+        "title": "Werder Bremen - Stuttgart",
+        "group": "21:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=762",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=762"
+      },
+      {
+        "service": "iptv",
+        "title": "Braga - Santa Clara",
+        "group": "21:45",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=769",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=769"
+      },
+      {
+        "service": "iptv",
+        "title": "Bologna - Juventus",
+        "group": "22:45",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=744",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=744"
+      },
+      {
+        "service": "iptv",
+        "title": "Bologna - Juventus",
+        "group": "22:45",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=765",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=765"
+      },
+      {
+        "service": "iptv",
+        "title": "Marsilya - Monaco",
+        "group": "22:45",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=780",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=780"
+      },
+      {
+        "service": "iptv",
+        "title": "Alaves - Real Madrid",
+        "group": "23:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=763",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=763"
+      },
+      {
+        "service": "iptv",
+        "title": "Alaves - Real Madrid",
+        "group": "23:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=1020",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=1020"
+      },
+      {
+        "service": "iptv",
+        "title": "Sakaryaspor - Hatayspor",
+        "group": "20:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=77",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=77"
+      },
+      {
+        "service": "iptv",
+        "title": "Manchester Utd - Bournemouth",
+        "group": "23:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=779",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=779"
+      },
+      {
+        "service": "iptv",
+        "title": "Porto - Estrela",
+        "group": "23:45",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=762",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=762"
+      },
+      {
+        "service": "iptv",
+        "title": "Azul Claro Numazu - Reilac Shiga",
+        "group": "07:45",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916107",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916107"
+      },
+      {
+        "service": "iptv",
+        "title": "Viabenten Shiga - Osaka City SC",
+        "group": "08:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916049",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916049"
+      },
+      {
+        "service": "iptv",
+        "title": "Osaka - Tegevajaro Miyazaki",
+        "group": "08:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916045",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916045"
+      },
+      {
+        "service": "iptv",
+        "title": "Ara - Gujarat Police",
+        "group": "08:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916323",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916323"
+      },
+      {
+        "service": "iptv",
+        "title": "Shatin - Sham Shui Po SA",
+        "group": "08:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916215",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916215"
+      },
+      {
+        "service": "iptv",
+        "title": "Gen B Mojokerto - Mojokerto",
+        "group": "09:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916343",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916343"
+      },
+      {
+        "service": "iptv",
+        "title": "Zigong Changhuai Hongxiang - Neijiang Chonglong Wine",
+        "group": "09:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916379",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17916379"
+      },
+      {
+        "service": "iptv",
+        "title": "Ankara BB - Fenerbahçe",
+        "group": "14:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=76",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=76"
+      },
+      {
+        "service": "iptv",
+        "title": "Elversberg - Fortuna Düsseldorf",
+        "group": "15:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=769",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=769"
+      },
+      {
+        "service": "iptv",
+        "title": "Schalke 04 - Nürnberg",
+        "group": "15:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=762",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=762"
+      },
+      {
+        "service": "iptv",
+        "title": "Ajax - Feyenoord",
+        "group": "16:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=75",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=75"
+      },
+      {
+        "service": "iptv",
+        "title": "AZ Alkmaar - Excelsior",
+        "group": "18:45",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=769",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=769"
+      },
+      {
+        "service": "iptv",
+        "title": "Fenerbahçe - Konyaspor",
+        "group": "15:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=76",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=76"
+      }
+    ]
   }
 }
