@@ -21,8 +21,9 @@ jobs:
       - name: Gereksinimler
         run: pip install -r requirements.txt
 
-      - name: Bosssports çalıştır
-        run: python bosssports.py
+    - name: Bosssports çalıştır
+  run: python pygoals.py
+
 
       - name: Değişiklikleri commit et
         run: |
