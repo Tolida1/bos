@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo (full)
+      - name: Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -23,27 +23,27 @@ jobs:
         with:
           python-version: "3.12"
 
+      # 🔹 SADECE BURASI GÜNCELLENDİ
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+          playwright install chromium
 
       - name: Run scraper
         run: |
           python pygoals.py
 
-      - name: Commit & push safely
+      # 🔹 PUSH MANTIĞI AYNI, BOZULMADI
+      - name: Commit & push if changed
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          # repo'yu güncelle
           git fetch origin
           git checkout main
           git reset --hard origin/main
 
-          # dosyayı tekrar ekle (reset sonrası)
           git add bosssports.json
           git diff --cached --quiet || git commit -m "auto update bosssports"
 
-          # güvenli push
           git push --force-with-lease origin main
