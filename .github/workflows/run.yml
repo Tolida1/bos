@@ -1,11 +1,12 @@
 name: Bosssports Scraper
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:   # manuel çalıştırma
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - name: Repo checkout
@@ -16,19 +17,27 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Gereksinimler
+      - name: Pip güncelle
+        run: python -m pip install --upgrade pip
+
+      - name: Gereksinimleri kur
         run: pip install -r requirements.txt
 
-      - name: Playwright browser indir
+      - name: Playwright Chromium indir
         run: playwright install chromium
 
-      - name: Script çalıştır
-        run: python pygoals.py
+      - name: Py script çalıştır
+        run: |
+          python pygoals.py || true
 
-      - name: JSON commit
+      - name: Git ayarları
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+
+      - name: JSON commit & push
+        run: |
           git add bosssports.json
           git commit -m "auto update bosssports" || echo "Değişiklik yok"
+          git pull --rebase
           git push
