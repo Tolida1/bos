@@ -2,8 +2,6 @@ name: Bosssports Scraper
 
 on:
   workflow_dispatch:   # manuel çalıştırma
-  schedule:
-    - cron: "*/10 * * * *"   # 10 dakikada bir (istersen değiştir)
 
 jobs:
   scrape:
@@ -21,14 +19,16 @@ jobs:
       - name: Gereksinimler
         run: pip install -r requirements.txt
 
-    - name: Bosssports çalıştır
-  run: python pygoals.py
+      - name: Dosya kontrol
+        run: ls -la
 
+      - name: Bosssports çalıştır
+        run: python pygoals.py
 
-      - name: Değişiklikleri commit et
+      - name: JSON commit
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add bosssports.json
+          git add *.json
           git commit -m "auto update bosssports" || echo "Değişiklik yok"
           git push
