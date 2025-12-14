@@ -1,50 +1,42 @@
-import requests
 import json
-from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
 
 BASE_SITE = "https://bosssports268.com/"
 CHANNEL_URL = BASE_SITE + "channel.html?id={}"
 
-headers = {
-    "User-Agent": "Mozilla/5.0",
-    "Referer": BASE_SITE
-}
-
-r = requests.get(BASE_SITE, headers=headers, timeout=20)
-soup = BeautifulSoup(r.text, "html.parser")
-
 items = []
 seen = set()
 
-# ✅ FUTBOL TAB'I
-football_tab = soup.find("div", id="pills-football")
-if not football_tab:
-    print("❌ pills-football bulunamadı")
-else:
-    for block in football_tab.find_all("div", class_="match-block"):
-        watch_id = block.get("data-watch")
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    page = browser.new_page()
+    page.goto(BASE_SITE, timeout=60000)
+
+    # ⏳ JS YÜKLENSİN
+    page.wait_for_selector("#pills-football .match-block", timeout=60000)
+
+    blocks = page.query_selector_all("#pills-football .match-block")
+
+    for block in blocks:
+        watch_id = block.get_attribute("data-watch")
         if not watch_id:
             continue
 
-        # ⏰ Saat
-        time_div = block.find("div", class_="time")
-        match_time = time_div.get_text(strip=True) if time_div else ""
+        time_el = block.query_selector(".time")
+        match_time = time_el.inner_text().strip() if time_el else ""
 
-        # 👥 Takımlar
-        teams = block.find_all("div", class_="name")
+        teams = block.query_selector_all(".team .name")
         if len(teams) < 2:
             continue
 
-        team1 = teams[0].get_text(strip=True)
-        team2 = teams[1].get_text(strip=True)
+        team1 = teams[0].inner_text().strip()
+        team2 = teams[1].inner_text().strip()
 
         title = f"{team1} - {team2}"
-
-        # 🔁 Aynı maç + saat tekrarını engelle
-        uniq_key = f"{watch_id}_{match_time}"
-        if uniq_key in seen:
+        uniq = f"{watch_id}_{match_time}"
+        if uniq in seen:
             continue
-        seen.add(uniq_key)
+        seen.add(uniq)
 
         items.append({
             "service": "iptv",
@@ -55,7 +47,9 @@ else:
             "group": match_time
         })
 
-print(f"✔ Bulunan maç sayısı: {len(items)}")
+    browser.close()
+
+print(f"✔ Playwright ile bulunan maç: {len(items)}")
 
 output = {
     "list": {
@@ -67,5 +61,3 @@ output = {
 
 with open("bosssports.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
-
-print("🎯 bosssports.json başarıyla oluşturuldu")
