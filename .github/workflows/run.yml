@@ -1,9 +1,12 @@
-name: Update BossSports JSON
+name: Update BossSports JSON (Manual)
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "*/5 * * * *"
+  workflow_dispatch:   # 🔘 SADECE MANUEL
+
+# 🔐 Aynı anda sadece 1 run
+concurrency:
+  group: bosssports-manual
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -13,7 +16,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # ⬅️ çok önemli (rebase için)
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
