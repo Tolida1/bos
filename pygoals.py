@@ -1,70 +1,84 @@
+import requests
 import json
-from playwright.sync_api import sync_playwright
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
 
-URL = "https://bosssports268.com/"
-PLAY_TEMPLATE = "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3={id}"
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+}
+
+# 1️⃣ Aktif BossSports domainini bul
+def find_active_site(start=267, end=300):
+    for i in range(start, end + 1):
+        url = f"https://bosssports{i}.com/"
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=6)
+            if r.status_code == 200 and "match-list" in r.text:
+                print(f"✅ Aktif site bulundu: {url}")
+                return url
+        except:
+            pass
+    return None
+
+
+BASE_SITE = find_active_site()
+if not BASE_SITE:
+    print("❌ Aktif BossSports sitesi bulunamadı")
+    exit()
+
+# 2️⃣ Site içeriğini al
+r = requests.get(BASE_SITE, headers=HEADERS, timeout=10)
+soup = BeautifulSoup(r.text, "html.parser")
+
+# Football sekmesi
+football_tab = soup.find("div", id="pills-football")
+if not football_tab:
+    print("❌ Football tab bulunamadı")
+    exit()
 
 items = []
-seen = set()
 
-with sync_playwright() as p:
-    browser = p.chromium.launch(
-        headless=True,
-        args=["--no-sandbox", "--disable-setuid-sandbox"]
-    )
-    page = browser.new_page()
+# 3️⃣ Maçları çek
+for block in football_tab.find_all("div", class_="match-block"):
+    teams = block.find_all("div", class_="name")
+    time_div = block.find("div", class_="time")
+    watch_id = block.get("data-watch")
 
-    page.goto(URL, wait_until="domcontentloaded", timeout=60000)
+    if len(teams) < 2 or not time_div or not watch_id:
+        continue
 
-    # 🔴 EN KRİTİK SATIR
-    page.wait_for_selector(
-        "#pills-football .match-block",
-        timeout=60000
-    )
+    title = f"{teams[0].text.strip()} - {teams[1].text.strip()}"
+    match_time = time_div.text.strip()
 
-    # ekstra garanti (JS geç gelirse)
-    page.wait_for_timeout(3000)
+    play_url = f"{BASE_SITE}play.html?b=1&_3={watch_id}"
 
-    blocks = page.query_selector_all("#pills-football .match-block")
+    items.append({
+        "service": "iptv",
+        "title": title,
+        "playlistURL": "",
+        "media_url": play_url,
+        "url": play_url,
+        "h1Key": "accept",
+        "h1Val": "*/*",
+        "h2Key": "referer",
+        "h2Val": BASE_SITE,
+        "h3Key": "origin",
+        "h3Val": BASE_SITE.rstrip("/"),
+        "h4Key": "0",
+        "h4Val": "0",
+        "h5Key": "0",
+        "h5Val": "0",
+        "thumb_square": "https://i.hizliresim.com/gm27zjl.png",
+        "group": match_time
+    })
 
-    print("Bulunan maç:", len(blocks))
+    print(f"✔ {title} [{match_time}]")
 
-    for block in blocks:
-        watch_id = block.get_attribute("data-watch")
-        if not watch_id:
-            continue
-
-        time_el = block.query_selector(".time")
-        match_time = time_el.inner_text().strip() if time_el else ""
-
-        teams = block.query_selector_all(".team .name")
-        if len(teams) < 2:
-            continue
-
-        team1 = teams[0].inner_text().strip()
-        team2 = teams[1].inner_text().strip()
-
-        uniq = f"{watch_id}_{match_time}"
-        if uniq in seen:
-            continue
-        seen.add(uniq)
-
-        play_url = PLAY_TEMPLATE.format(id=watch_id)
-
-        items.append({
-            "service": "iptv",
-            "title": f"{team1} - {team2}",
-            "group": match_time,
-            "url": play_url,
-            "media_url": play_url
-        })
-
-    browser.close()
-
+# 4️⃣ JSON yaz
 output = {
     "list": {
         "service": "iptv",
-        "title": "bosssports",
+        "title": "iptv",
         "item": items
     }
 }
@@ -72,4 +86,4 @@ output = {
 with open("bosssports.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
 
-print("✔ Yazılan maç:", len(items))
+print(f"\n🎯 bosssports.json oluşturuldu ({len(items)} maç)")
