@@ -1,84 +1,100 @@
-import requests
+from playwright.sync_api import sync_playwright
 import json
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
+import time
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-}
+START_DOMAIN = 267
+END_DOMAIN = 300
 
-# 1️⃣ Aktif BossSports domainini bul
-def find_active_site(start=267, end=300):
-    for i in range(start, end + 1):
-        url = f"https://bosssports{i}.com/"
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=6)
-            if r.status_code == 200 and "match-list" in r.text:
-                print(f"✅ Aktif site bulundu: {url}")
-                return url
-        except:
-            pass
-    return None
-
-
-BASE_SITE = find_active_site()
-if not BASE_SITE:
-    print("❌ Aktif BossSports sitesi bulunamadı")
-    exit()
-
-# 2️⃣ Site içeriğini al
-r = requests.get(BASE_SITE, headers=HEADERS, timeout=10)
-soup = BeautifulSoup(r.text, "html.parser")
-
-# Football sekmesi
-football_tab = soup.find("div", id="pills-football")
-if not football_tab:
-    print("❌ Football tab bulunamadı")
-    exit()
+THUMB = "https://i.hizliresim.com/gm27zjl.png"
 
 items = []
 
-# 3️⃣ Maçları çek
-for block in football_tab.find_all("div", class_="match-block"):
-    teams = block.find_all("div", class_="name")
-    time_div = block.find("div", class_="time")
-    watch_id = block.get("data-watch")
+def scrape_site(base_url: str):
+    print(f"🔍 Taranıyor: {base_url}")
 
-    if len(teams) < 2 or not time_div or not watch_id:
-        continue
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
 
-    title = f"{teams[0].text.strip()} - {teams[1].text.strip()}"
-    match_time = time_div.text.strip()
+        try:
+            page.goto(base_url, timeout=60000)
+            page.wait_for_selector(".match-block", timeout=15000)
+        except:
+            print("❌ Ana sayfa yüklenemedi")
+            browser.close()
+            return
 
-    play_url = f"{BASE_SITE}play.html?b=1&_3={watch_id}"
+        matches = page.query_selector_all(".match-block")
 
-    items.append({
-        "service": "iptv",
-        "title": title,
-        "playlistURL": "",
-        "media_url": play_url,
-        "url": play_url,
-        "h1Key": "accept",
-        "h1Val": "*/*",
-        "h2Key": "referer",
-        "h2Val": BASE_SITE,
-        "h3Key": "origin",
-        "h3Val": BASE_SITE.rstrip("/"),
-        "h4Key": "0",
-        "h4Val": "0",
-        "h5Key": "0",
-        "h5Val": "0",
-        "thumb_square": "https://i.hizliresim.com/gm27zjl.png",
-        "group": match_time
-    })
+        for m in matches:
+            match_id = m.get_attribute("data-watch")
+            teams = m.query_selector_all(".name")
+            time_div = m.query_selector(".time")
 
-    print(f"✔ {title} [{match_time}]")
+            if not match_id or len(teams) < 2 or not time_div:
+                continue
 
-# 4️⃣ JSON yaz
+            title = f"{teams[0].inner_text()} - {teams[1].inner_text()}"
+            match_time = time_div.inner_text()
+
+            play_url = f"{base_url}/play.html?b=1&_3={match_id}"
+
+            m3u8_url = None
+
+            def catch_response(resp):
+                nonlocal m3u8_url
+                if "playlist.m3u8" in resp.url:
+                    m3u8_url = resp.url
+
+            page.on("response", catch_response)
+
+            try:
+                page.goto(play_url, timeout=60000)
+                page.wait_for_timeout(4000)
+            except:
+                continue
+
+            if not m3u8_url:
+                print(f"❌ M3U8 yok: {title}")
+                continue
+
+            items.append({
+                "service": "iptv",
+                "title": title,
+                "playlistURL": "",
+                "media_url": m3u8_url,
+                "url": m3u8_url,
+                "h1Key": "accept",
+                "h1Val": "*/*",
+                "h2Key": "referer",
+                "h2Val": base_url + "/",
+                "h3Key": "origin",
+                "h3Val": base_url,
+                "h4Key": "0",
+                "h4Val": "0",
+                "h5Key": "0",
+                "h5Val": "0",
+                "thumb_square": THUMB,
+                "group": match_time
+            })
+
+            print(f"✅ {title} | {match_time}")
+
+            page.remove_listener("response", catch_response)
+
+        browser.close()
+
+
+# 🔁 DOMAIN DÖNGÜSÜ
+for i in range(START_DOMAIN, END_DOMAIN + 1):
+    site = f"https://bosssports{i}.com"
+    scrape_site(site)
+
+# 💾 JSON YAZ
 output = {
     "list": {
         "service": "iptv",
-        "title": "iptv",
+        "title": "bosssports",
         "item": items
     }
 }
@@ -86,4 +102,4 @@ output = {
 with open("bosssports.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
 
-print(f"\n🎯 bosssports.json oluşturuldu ({len(items)} maç)")
+print(f"\n🎯 TAMAMLANDI | Toplam {len(items)} yayın bulundu")
