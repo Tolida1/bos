@@ -1,117 +1,86 @@
-import re
-import json
 from playwright.sync_api import sync_playwright
+import json
+import time
 
-START = 267
-END = 300
+SITE = "bosssports268.com"
+RESULT = []
 
-OUTPUT_FILE = "bosssports.json"
-THUMB = "https://i.hizliresim.com/gm27zjl.png"
+def extract_m3u8(page, watch_id):
+    m3u8s = set()
 
-items = []
+    def on_response(resp):
+        if "playlist.m3u8" in resp.url:
+            m3u8s.add(resp.url)
 
+    page.on("response", on_response)
 
-def save_item(title, m3u8, site, time_text):
-    items.append({
-        "service": "iptv",
-        "title": title,
-        "playlistURL": "",
-        "media_url": m3u8,
-        "url": m3u8,
-        "h1Key": "accept",
-        "h1Val": "*/*",
-        "h2Key": "referer",
-        "h2Val": site,
-        "h3Key": "origin",
-        "h3Val": site.rstrip("/"),
-        "h4Key": "0",
-        "h4Val": "0",
-        "h5Key": "0",
-        "h5Val": "0",
-        "thumb_square": THUMB,
-        "group": time_text
-    })
+    page.goto(
+        f"https://{SITE}/play.html?b=1&_3={watch_id}",
+        wait_until="networkidle",
+        timeout=60000
+    )
+
+    time.sleep(3)
+    page.off("response", on_response)
+
+    return list(m3u8s)
 
 
-def scrape_site(site):
-    print(f"🔍 Taranıyor: {site}")
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    context = browser.new_context()
+    page = context.new_page()
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=True,
-            args=["--no-sandbox", "--disable-dev-shm-usage"]
-        )
-        page = browser.new_page()
+    print(f"🔍 Site açılıyor: https://{SITE}")
+    page.goto(f"https://{SITE}", wait_until="domcontentloaded", timeout=60000)
 
+    matches = page.locator("div.match-block").all()
+
+    for m in matches:
         try:
-            page.goto(site, timeout=30000, wait_until="domcontentloaded")
-        except:
-            print("❌ Ana sayfa açılamadı")
-            browser.close()
-            return
+            watch_id = m.get_attribute("data-watch")
+            teams = m.locator(".name").all_text_contents()
+            match_time = m.locator(".time").inner_text()
+            title = " - ".join(teams)
 
-        matches = page.locator("[data-watch]")
-        count = matches.count()
+            print(f"🎯 {title} ({watch_id})")
 
-        if count == 0:
-            print("❌ Maç bulunamadı")
-            browser.close()
-            return
+            m3u8_links = extract_m3u8(page, watch_id)
 
-        for i in range(count):
-            try:
-                m = matches.nth(i)
+            for m3u8 in m3u8_links:
+                RESULT.append({
+                    "service": "iptv",
+                    "title": title,
+                    "playlistURL": "",
+                    "media_url": m3u8,
+                    "url": m3u8,
+                    "h1Key": "accept",
+                    "h1Val": "*/*",
+                    "h2Key": "referer",
+                    "h2Val": f"https://{SITE}/",
+                    "h3Key": "origin",
+                    "h3Val": f"https://{SITE}",
+                    "thumb_square": "https://i.hizliresim.com/gm27zjl.png",
+                    "group": match_time
+                })
 
-                title = m.inner_text(timeout=3000).strip()
-                match_id = m.get_attribute("data-watch")
+            if not m3u8_links:
+                print("❌ m3u8 bulunamadı")
 
-                if not match_id:
-                    continue
+        except Exception as e:
+            print("⚠️ Hata:", e)
 
-                time_el = m.locator(".channel-status, .match-time")
-                time_text = time_el.inner_text().strip() if time_el.count() else ""
+    browser.close()
 
-                play_url = f"{site}/play.html?b=1&_3={match_id}"
-
-                p2 = browser.new_page()
-                p2.goto(play_url, timeout=30000, wait_until="domcontentloaded")
-
-                html = p2.content()
-                p2.close()
-
-                r = re.search(r"https://[^\"']+/playlist\.m3u8", html)
-                if not r:
-                    print(f"❌ M3U8 yok: {title}")
-                    continue
-
-                m3u8 = r.group(0)
-                print(f"✅ {title} → {m3u8}")
-
-                save_item(title, m3u8, site, time_text)
-
-            except Exception as e:
-                print(f"⚠️ Atlandı: {e}")
-                continue
-
-        browser.close()
-
-
-# 🔁 Site taraması
-for i in range(START, END + 1):
-    site = f"https://bosssports{i}.com"
-    scrape_site(site)
-
-
-# 💾 JSON yaz
-output = {
+final_json = {
     "list": {
         "service": "iptv",
         "title": "iptv",
-        "item": items
+        "item": RESULT
     }
 }
 
-with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-    json.dump(output, f, ensure_ascii=False, indent=2)
+with open("bosssports.json", "w", encoding="utf-8") as f:
+    json.dump(final_json, f, ensure_ascii=False, indent=2)
 
-print(f"\n🎯 {OUTPUT_FILE} oluşturuldu ({len(items)} kayıt)")
+print(f"✅ Toplam m3u8: {len(RESULT)}")
