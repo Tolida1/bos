@@ -27,6 +27,8 @@ if not BASE_SITE:
     print("❌ Aktif BossSports sitesi bulunamadı")
     exit()
 
+BASE_SITE = BASE_SITE.rstrip("/")
+
 # --------------------------------------------------
 # 2️⃣ Ana sayfayı al
 # --------------------------------------------------
@@ -41,7 +43,7 @@ if not football_tab:
 items = []
 
 # --------------------------------------------------
-# 3️⃣ Maçları çek + M3U8 domainlerini çöz
+# 3️⃣ Maçları çek + m3u8 çöz
 # --------------------------------------------------
 for block in football_tab.find_all("div", class_="match-block"):
     teams = block.find_all("div", class_="name")
@@ -54,14 +56,11 @@ for block in football_tab.find_all("div", class_="match-block"):
     title = f"{teams[0].text.strip()} - {teams[1].text.strip()}"
     match_time = time_div.text.strip()
 
-    # --------------------------------------------------
-    # 4️⃣ x?id ile bo.*.workers.dev domainlerini çek
-    # --------------------------------------------------
     m3u8_links = []
 
     try:
         rx = requests.get(
-            f"{BASE_SITE.rstrip('/')}/x?id={watch_id}",
+            f"{BASE_SITE}/x?id={watch_id}",
             headers=HEADERS,
             timeout=8
         ).json()
@@ -83,15 +82,31 @@ for block in football_tab.find_all("div", class_="match-block"):
     if not m3u8_links:
         continue
 
+    # --------------------------------------------------
+    # 4️⃣ JSON ITEM (REFERER / ORIGIN / UA DAHİL)
+    # --------------------------------------------------
     items.append({
         "service": "iptv",
         "title": title,
         "playlistURL": "",
-        "media_url": m3u8_links[0],      # ana link
+        "media_url": m3u8_links[0],
         "url": m3u8_links[0],
-        "backup_links": m3u8_links[1:],  # yedekler
-        "group": match_time,
-        "thumb_square": "https://i.hizliresim.com/gm27zjl.png"
+
+        "h1Key": "user-agent",
+        "h1Val": HEADERS["User-Agent"],
+
+        "h2Key": "referer",
+        "h2Val": BASE_SITE + "/",  
+
+        "h3Key": "origin",
+        "h3Val": BASE_SITE,
+
+        "h4Key": "accept",
+        "h4Val": "*/*",
+
+        "backup_links": m3u8_links[1:],
+        "thumb_square": "https://i.hizliresim.com/gm27zjl.png",
+        "group": match_time
     })
 
     print(f"✔ {title} [{match_time}] → {len(m3u8_links)} link")
