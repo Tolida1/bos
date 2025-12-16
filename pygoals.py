@@ -2,13 +2,24 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
+# ==================================================
+# TAM USER-AGENT (GERÇEK TARAYICI)
+# ==================================================
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/121.0.0.0 Safari/537.36"
+)
+
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    "User-Agent": USER_AGENT,
+    "Accept": "*/*",
+    "Connection": "keep-alive"
 }
 
-# --------------------------------------------------
-# 1️⃣ Aktif BossSports domainini bul
-# --------------------------------------------------
+# ==================================================
+# 1️⃣ AKTİF BOSSSPORTS SİTESİNİ BUL
+# ==================================================
 def find_active_site(start=267, end=300):
     for i in range(start, end + 1):
         url = f"https://bosssports{i}.com/"
@@ -16,7 +27,7 @@ def find_active_site(start=267, end=300):
             r = requests.get(url, headers=HEADERS, timeout=6)
             if r.status_code == 200 and "match-list" in r.text:
                 print(f"✅ Aktif site bulundu: {url}")
-                return url
+                return url.rstrip("/")
         except:
             pass
     return None
@@ -27,11 +38,12 @@ if not BASE_SITE:
     print("❌ Aktif BossSports sitesi bulunamadı")
     exit()
 
-BASE_SITE = BASE_SITE.rstrip("/")
+REFERER = BASE_SITE + "/"
+ORIGIN = BASE_SITE
 
-# --------------------------------------------------
-# 2️⃣ Ana sayfayı al
-# --------------------------------------------------
+# ==================================================
+# 2️⃣ ANA SAYFAYI ÇEK
+# ==================================================
 r = requests.get(BASE_SITE, headers=HEADERS, timeout=10)
 soup = BeautifulSoup(r.text, "html.parser")
 
@@ -42,9 +54,9 @@ if not football_tab:
 
 items = []
 
-# --------------------------------------------------
-# 3️⃣ Maçları çek + m3u8 çöz
-# --------------------------------------------------
+# ==================================================
+# 3️⃣ MAÇLARI + M3U8 LİNKLERİNİ ÇEK
+# ==================================================
 for block in football_tab.find_all("div", class_="match-block"):
     teams = block.find_all("div", class_="name")
     time_div = block.find("div", class_="time")
@@ -70,6 +82,7 @@ for block in football_tab.find_all("div", class_="match-block"):
                 if (
                     isinstance(row, list)
                     and row
+                    and isinstance(row[0], str)
                     and row[0].startswith("bo.")
                     and row[0].endswith(".workers.dev")
                 ):
@@ -82,9 +95,9 @@ for block in football_tab.find_all("div", class_="match-block"):
     if not m3u8_links:
         continue
 
-    # --------------------------------------------------
-    # 4️⃣ JSON ITEM (REFERER / ORIGIN / UA DAHİL)
-    # --------------------------------------------------
+    # ==================================================
+    # 4️⃣ JSON ITEM (HEADER'LAR TAM VE OTOMATİK)
+    # ==================================================
     items.append({
         "service": "iptv",
         "title": title,
@@ -93,13 +106,13 @@ for block in football_tab.find_all("div", class_="match-block"):
         "url": m3u8_links[0],
 
         "h1Key": "user-agent",
-        "h1Val": HEADERS["User-Agent"],
+        "h1Val": USER_AGENT,
 
         "h2Key": "referer",
-        "h2Val": BASE_SITE + "/",  
+        "h2Val": REFERER,
 
         "h3Key": "origin",
-        "h3Val": BASE_SITE,
+        "h3Val": ORIGIN,
 
         "h4Key": "accept",
         "h4Val": "*/*",
@@ -111,9 +124,9 @@ for block in football_tab.find_all("div", class_="match-block"):
 
     print(f"✔ {title} [{match_time}] → {len(m3u8_links)} link")
 
-# --------------------------------------------------
-# 5️⃣ JSON yaz
-# --------------------------------------------------
+# ==================================================
+# 5️⃣ JSON YAZ
+# ==================================================
 output = {
     "list": {
         "service": "iptv",
