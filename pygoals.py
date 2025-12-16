@@ -2,9 +2,9 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-# ==============================
-# TAM USER-AGENT
-# ==============================
+# ==================================================
+# TAM USER-AGENT (GERÇEK TARAYICI)
+# ==================================================
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -17,45 +17,46 @@ HEADERS = {
     "Connection": "keep-alive"
 }
 
-# ==============================
-# 1️⃣ AKTİF BOSSSPORTS BUL
-# ==============================
+# ==================================================
+# 1️⃣ AKTİF BOSSSPORTS SİTESİNİ BUL
+# ==================================================
 def find_active_site(start=267, end=300):
     for i in range(start, end + 1):
         url = f"https://bosssports{i}.com/"
         try:
             r = requests.get(url, headers=HEADERS, timeout=6)
             if r.status_code == 200 and "match-list" in r.text:
-                print(f"✅ Aktif site: {url}")
+                print(f"✅ Aktif site bulundu: {url}")
                 return url.rstrip("/")
         except:
             pass
     return None
 
+
 BASE_SITE = find_active_site()
 if not BASE_SITE:
-    print("❌ Aktif BossSports bulunamadı")
+    print("❌ Aktif BossSports sitesi bulunamadı")
     exit()
 
 REFERER = BASE_SITE + "/"
 ORIGIN = BASE_SITE
 
-# ==============================
-# 2️⃣ ANA SAYFA
-# ==============================
+# ==================================================
+# 2️⃣ ANA SAYFAYI ÇEK
+# ==================================================
 html = requests.get(BASE_SITE, headers=HEADERS, timeout=10).text
 soup = BeautifulSoup(html, "html.parser")
 
 football_tab = soup.find("div", id="pills-football")
 if not football_tab:
-    print("❌ Football tab yok")
+    print("❌ Football tab bulunamadı")
     exit()
 
 items = []
 
-# ==============================
-# 3️⃣ MAÇLAR
-# ==============================
+# ==================================================
+# 3️⃣ MAÇLARI + GERÇEK M3U8 ÇÖZ
+# ==================================================
 for block in football_tab.find_all("div", class_="match-block"):
     teams = block.find_all("div", class_="name")
     time_div = block.find("div", class_="time")
@@ -69,9 +70,9 @@ for block in football_tab.find_all("div", class_="match-block"):
 
     real_links = []
 
-    # ==============================
-    # 4️⃣ DOMAINLERİ AL
-    # ==============================
+    # --------------------------------------------------
+    # DOMAINLERİ AL
+    # --------------------------------------------------
     try:
         rx = requests.get(
             f"{BASE_SITE}/x?id={watch_id}",
@@ -90,37 +91,37 @@ for block in football_tab.find_all("div", class_="match-block"):
 
         domain = row[0]
 
-        # ==============================
-        # 5️⃣ OLASI YOLLAR (SIRAYLA)
-        # ==============================
-        probe_paths = [
-            f"https://{domain}/{watch_id}/playlist.m3u8",                 # YENİ (en sık)
-            f"https://{domain}/-/{watch_id}/playlist.m3u8",               # ARA
-            f"https://{domain}/f6e33e69e0fdec0a7780e174f3c8b2c2/-/{watch_id}/playlist.m3u8",  # ESKİ
+        # --------------------------------------------------
+        # OLASI YOLLAR (SIRAYLA DENE)
+        # --------------------------------------------------
+        probe_urls = [
+            f"https://{domain}/{watch_id}/playlist.m3u8",                 # yeni
+            f"https://{domain}/-/{watch_id}/playlist.m3u8",               # ara
+            f"https://{domain}/f6e33e69e0fdec0a7780e174f3c8b2c2/-/{watch_id}/playlist.m3u8"  # eski
         ]
 
-        for probe_url in probe_paths:
+        for probe in probe_urls:
             try:
                 r = requests.get(
-                    probe_url,
+                    probe,
                     headers=HEADERS,
                     timeout=8,
                     allow_redirects=True
                 )
 
-                # ✅ REDIRECT SONRASI GERÇEK URL
+                # ✅ REDIRECT SONRASI GERÇEK LINK
                 if r.status_code == 200 and r.url.endswith("playlist.m3u8"):
                     real_links.append(r.url)
-                    break  # bu domain için yeterli
+                    break  # bu domain yeterli
             except:
                 pass
 
     if not real_links:
         continue
 
-    # ==============================
-    # 6️⃣ JSON ITEM (HEADER'LAR TAM)
-    # ==============================
+    # ==================================================
+    # 4️⃣ JSON ITEM (HEADER'LAR TAM)
+    # ==================================================
     items.append({
         "service": "iptv",
         "title": title,
@@ -141,14 +142,15 @@ for block in football_tab.find_all("div", class_="match-block"):
         "h4Key": "accept",
         "h4Val": "*/*",
 
+        "thumb_square": "https://i.hizliresim.com/gm27zjl.png",
         "group": match_time
     })
 
-    print(f"✔ {title} → {len(real_links)} gerçek link")
+    print(f"✔ {title} [{match_time}] → {len(real_links)} gerçek link")
 
-# ==============================
-# 7️⃣ JSON YAZ
-# ==============================
+# ==================================================
+# 5️⃣ JSON YAZ
+# ==================================================
 output = {
     "list": {
         "service": "iptv",
