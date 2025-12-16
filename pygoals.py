@@ -2,9 +2,6 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-# ==================================================
-# TAM USER-AGENT (GERÇEK TARAYICI)
-# ==================================================
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -17,10 +14,10 @@ HEADERS = {
     "Connection": "keep-alive"
 }
 
-# ==================================================
-# 1️⃣ AKTİF BOSSSPORTS SİTESİNİ BUL
-# ==================================================
-def find_active_site(start=276, end=300):
+# --------------------------------------------------
+# 1️⃣ Aktif BossSports domainini bul
+# --------------------------------------------------
+def find_active_site(start=267, end=300):
     for i in range(start, end + 1):
         url = f"https://bosssports{i}.com/"
         try:
@@ -41,11 +38,13 @@ if not BASE_SITE:
 REFERER = BASE_SITE + "/"
 ORIGIN = BASE_SITE
 
-# ==================================================
-# 2️⃣ ANA SAYFAYI ÇEK
-# ==================================================
-r = requests.get(BASE_SITE, headers=HEADERS, timeout=10)
-soup = BeautifulSoup(r.text, "html.parser")
+# --------------------------------------------------
+# 2️⃣ Ana sayfayı al
+# --------------------------------------------------
+soup = BeautifulSoup(
+    requests.get(BASE_SITE, headers=HEADERS, timeout=10).text,
+    "html.parser"
+)
 
 football_tab = soup.find("div", id="pills-football")
 if not football_tab:
@@ -54,9 +53,9 @@ if not football_tab:
 
 items = []
 
-# ==================================================
-# 3️⃣ MAÇLARI + M3U8 LİNKLERİNİ ÇEK
-# ==================================================
+# --------------------------------------------------
+# 3️⃣ MAÇLAR
+# --------------------------------------------------
 for block in football_tab.find_all("div", class_="match-block"):
     teams = block.find_all("div", class_="name")
     time_div = block.find("div", class_="time")
@@ -68,8 +67,11 @@ for block in football_tab.find_all("div", class_="match-block"):
     title = f"{teams[0].text.strip()} - {teams[1].text.strip()}"
     match_time = time_div.text.strip()
 
-    m3u8_links = []
+    real_links = []
 
+    # --------------------------------------------------
+    # 4️⃣ DOMAIN + GERÇEK PATH ÇÖZ
+    # --------------------------------------------------
     try:
         rx = requests.get(
             f"{BASE_SITE}/x?id={watch_id}",
@@ -77,33 +79,38 @@ for block in football_tab.find_all("div", class_="match-block"):
             timeout=8
         ).json()
 
-        if isinstance(rx, list):
-            for row in rx:
-                if (
-                    isinstance(row, list)
-                    and row
-                    and isinstance(row[0], str)
-                    and row[0].startswith("bo.")
-                    and row[0].endswith(".workers.dev")
-                ):
-                    m3u8_links.append(
-                        f"https://{row[0]}/{watch_id}/playlist.m3u8"
-                    )
-    except:
-        pass
+        for row in rx:
+            domain = row[0]
 
-    if not m3u8_links:
+            # 🔑 eski yol SADECE tetiklemek için
+            probe_url = f"https://{domain}/f6e33e69e0fdec0a7780e174f3c8b2c2/-/{watch_id}/playlist.m3u8"
+
+            r = requests.get(
+                probe_url,
+                headers=HEADERS,
+                timeout=8,
+                allow_redirects=True
+            )
+
+            # ✅ GERÇEK URL (redirect sonrası)
+            if r.status_code == 200 and "playlist.m3u8" in r.url:
+                real_links.append(r.url)
+
+    except Exception as e:
+        print("Çözüm hatası:", e)
+
+    if not real_links:
         continue
 
-    # ==================================================
-    # 4️⃣ JSON ITEM (HEADER'LAR TAM VE OTOMATİK)
-    # ==================================================
+    # --------------------------------------------------
+    # 5️⃣ JSON ITEM
+    # --------------------------------------------------
     items.append({
         "service": "iptv",
         "title": title,
-        "playlistURL": "",
-        "media_url": m3u8_links[0],
-        "url": m3u8_links[0],
+        "media_url": real_links[0],
+        "url": real_links[0],
+        "backup_links": real_links[1:],
 
         "h1Key": "user-agent",
         "h1Val": USER_AGENT,
@@ -117,25 +124,21 @@ for block in football_tab.find_all("div", class_="match-block"):
         "h4Key": "accept",
         "h4Val": "*/*",
 
-        "backup_links": m3u8_links[1:],
-        "thumb_square": "https://i.hizliresim.com/gm27zjl.png",
         "group": match_time
     })
 
-    print(f"✔ {title} [{match_time}] → {len(m3u8_links)} link")
+    print(f"✔ {title} → gerçek link bulundu")
 
-# ==================================================
-# 5️⃣ JSON YAZ
-# ==================================================
-output = {
-    "list": {
-        "service": "iptv",
-        "title": "BossSports",
-        "item": items
-    }
-}
-
+# --------------------------------------------------
+# 6️⃣ JSON YAZ
+# --------------------------------------------------
 with open("bosssports.json", "w", encoding="utf-8") as f:
-    json.dump(output, f, ensure_ascii=False, indent=2)
+    json.dump({
+        "list": {
+            "service": "iptv",
+            "title": "BossSports",
+            "item": items
+        }
+    }, f, ensure_ascii=False, indent=2)
 
 print(f"\n🎯 bosssports.json oluşturuldu ({len(items)} maç)")
