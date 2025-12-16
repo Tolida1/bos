@@ -1,7 +1,92 @@
 {
   "list": {
     "service": "iptv",
-    "title": "iptv",
-    "item": []
+    "title": "bosssports",
+    "item": [
+      {
+        "service": "iptv",
+        "title": "Fatih Karagümrük - İstanbulspor",
+        "group": "15:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=73",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=73"
+      },
+      {
+        "service": "iptv",
+        "title": "Ç.Rizespor - Gaziantep FK",
+        "group": "18:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=73",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=73"
+      },
+      {
+        "service": "iptv",
+        "title": "Trabzonspor - Alanyaspor",
+        "group": "20:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=73",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=73"
+      },
+      {
+        "service": "iptv",
+        "title": "Real Chikkamagaluru - Income Tax",
+        "group": "07:30",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929262",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929262"
+      },
+      {
+        "service": "iptv",
+        "title": "Uniao do Nzinga - Alto Zambeze",
+        "group": "08:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929294",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929294"
+      },
+      {
+        "service": "iptv",
+        "title": "Sapporo University - Chukyo University",
+        "group": "08:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929380",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929380"
+      },
+      {
+        "service": "iptv",
+        "title": "Niigata University of Health and Welfare - Kyoto Sangyo University",
+        "group": "08:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929366",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929366"
+      },
+      {
+        "service": "iptv",
+        "title": "Momoyama Gakuin University - Toin University of Yokohama",
+        "group": "08:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929358",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929358"
+      },
+      {
+        "service": "iptv",
+        "title": "Jiangchen County - Municipal Vocational School",
+        "group": "08:25",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929480",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929480"
+      },
+      {
+        "service": "iptv",
+        "title": "Persekama Madiun - Akor Jombang",
+        "group": "09:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929623",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929623"
+      },
+      {
+        "service": "iptv",
+        "title": "Al Isteqlal - Jawanan Perozi",
+        "group": "09:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929634",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=17929634"
+      },
+      {
+        "service": "iptv",
+        "title": "Paris FC - Barcelona",
+        "group": "23:00",
+        "url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=1080",
+        "media_url": "https://bosssports268.com/play.html?b=1&_1=bo.096f27bf2d8048091c.workers.dev&_2=f6e33e69e0fdec0a7780e174f3c8b2c2&_3=1080"
+      }
+    ]
   }
 }
