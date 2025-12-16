@@ -20,7 +20,7 @@ HEADERS = {
 # ==================================================
 # 1️⃣ AKTİF BOSSSPORTS SİTESİNİ BUL
 # ==================================================
-def find_active_site(start=267, end=300):
+def find_active_site(start=276, end=300):
     for i in range(start, end + 1):
         url = f"https://bosssports{i}.com/"
         try:
