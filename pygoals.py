@@ -1,13 +1,14 @@
 import requests
 import json
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 }
 
+# --------------------------------------------------
 # 1️⃣ Aktif BossSports domainini bul
+# --------------------------------------------------
 def find_active_site(start=267, end=300):
     for i in range(start, end + 1):
         url = f"https://bosssports{i}.com/"
@@ -26,11 +27,12 @@ if not BASE_SITE:
     print("❌ Aktif BossSports sitesi bulunamadı")
     exit()
 
-# 2️⃣ Site içeriğini al
+# --------------------------------------------------
+# 2️⃣ Ana sayfayı al
+# --------------------------------------------------
 r = requests.get(BASE_SITE, headers=HEADERS, timeout=10)
 soup = BeautifulSoup(r.text, "html.parser")
 
-# Football sekmesi
 football_tab = soup.find("div", id="pills-football")
 if not football_tab:
     print("❌ Football tab bulunamadı")
@@ -38,7 +40,9 @@ if not football_tab:
 
 items = []
 
-# 3️⃣ Maçları çek
+# --------------------------------------------------
+# 3️⃣ Maçları çek + M3U8 domainlerini çöz
+# --------------------------------------------------
 for block in football_tab.find_all("div", class_="match-block"):
     teams = block.find_all("div", class_="name")
     time_div = block.find("div", class_="time")
@@ -50,35 +54,55 @@ for block in football_tab.find_all("div", class_="match-block"):
     title = f"{teams[0].text.strip()} - {teams[1].text.strip()}"
     match_time = time_div.text.strip()
 
-    play_url = f"{BASE_SITE}play.html?b=1&_3={watch_id}"
+    # --------------------------------------------------
+    # 4️⃣ x?id ile bo.*.workers.dev domainlerini çek
+    # --------------------------------------------------
+    m3u8_links = []
+
+    try:
+        rx = requests.get(
+            f"{BASE_SITE.rstrip('/')}/x?id={watch_id}",
+            headers=HEADERS,
+            timeout=8
+        ).json()
+
+        if isinstance(rx, list):
+            for row in rx:
+                if (
+                    isinstance(row, list)
+                    and row
+                    and row[0].startswith("bo.")
+                    and row[0].endswith(".workers.dev")
+                ):
+                    m3u8_links.append(
+                        f"https://{row[0]}/{watch_id}/playlist.m3u8"
+                    )
+    except:
+        pass
+
+    if not m3u8_links:
+        continue
 
     items.append({
         "service": "iptv",
         "title": title,
         "playlistURL": "",
-        "media_url": play_url,
-        "url": play_url,
-        "h1Key": "accept",
-        "h1Val": "*/*",
-        "h2Key": "referer",
-        "h2Val": BASE_SITE,
-        "h3Key": "origin",
-        "h3Val": BASE_SITE.rstrip("/"),
-        "h4Key": "0",
-        "h4Val": "0",
-        "h5Key": "0",
-        "h5Val": "0",
-        "thumb_square": "https://i.hizliresim.com/gm27zjl.png",
-        "group": match_time
+        "media_url": m3u8_links[0],      # ana link
+        "url": m3u8_links[0],
+        "backup_links": m3u8_links[1:],  # yedekler
+        "group": match_time,
+        "thumb_square": "https://i.hizliresim.com/gm27zjl.png"
     })
 
-    print(f"✔ {title} [{match_time}]")
+    print(f"✔ {title} [{match_time}] → {len(m3u8_links)} link")
 
-# 4️⃣ JSON yaz
+# --------------------------------------------------
+# 5️⃣ JSON yaz
+# --------------------------------------------------
 output = {
     "list": {
         "service": "iptv",
-        "title": "iptv",
+        "title": "BossSports",
         "item": items
     }
 }
